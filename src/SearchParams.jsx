@@ -5,6 +5,8 @@ const SearchParams = () => {
   // the 'useState' gives it a default value but it only for the first time after that it gets ignored every time
   const [location, setLocation] = useState("");
   const [animal, setAnimal] = useState("");
+  const [breed, setBreed] = useState("");
+  const breeds = ["poodle"]; //TODO remove it and add API
 
   // ABOVE destructuring can be written explicitly as
   // const locationHook = useState("");
@@ -29,11 +31,28 @@ const SearchParams = () => {
           <select
             id="animal"
             value={animal}
-            onChange={(e) => setAnimal(e.target.value)}
+            onChange={(e) => {
+              setAnimal(e.target.value);
+              setBreed("");
+            }}
           >
             <option />
             {ANIMALS.map((animal) => (
               <option key={animal}>{animal}</option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="breed">
+          Breed
+          <select
+            id="breed"
+            disabled={breeds.length === 0}
+            value={breed}
+            onChange={(e) => setBreed(e.target.value)}
+          >
+            <option />
+            {breeds.map((breed) => (
+              <option key={breed}>{breed}</option>
             ))}
           </select>
         </label>

@@ -6,7 +6,7 @@ const SearchParams = () => {
   const [location, setLocation] = useState("");
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
-  const breeds = ["poodle"]; //TODO remove it and add API
+  const breeds = []; //TODO remove it and add API
 
   // ABOVE destructuring can be written explicitly as
   // const locationHook = useState("");

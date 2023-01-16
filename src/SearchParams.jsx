@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Pet from "./Pet";
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
@@ -6,6 +7,7 @@ const SearchParams = () => {
   const [location, setLocation] = useState("");
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
+  const [pets, setPets] = useState([]);
   const breeds = []; //TODO remove it and add API
 
   // ABOVE destructuring can be written explicitly as
@@ -13,10 +15,25 @@ const SearchParams = () => {
   // const location = locationHook[0];
   // const setLocation = locationHook[1];
 
+  useEffect(() => {
+    console.log("useeffect");
+    requestPets();
+  });
+
+  async function requestPets() {
+    const res = await fetch(
+      `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
+    );
+    const json = await res.json();
+
+    setPets(json.pets);
+  }
+
   // returning jsx
   return (
     <div className="search-params">
       <form>
+        {/* input for location */}
         <label htmlFor="location">
           Location
           <input
@@ -26,6 +43,7 @@ const SearchParams = () => {
             placeholder="Location"
           />
         </label>
+        {/* selection for animal */}
         <label htmlFor="animal">
           Animal
           <select
@@ -42,6 +60,7 @@ const SearchParams = () => {
             ))}
           </select>
         </label>
+        {/* selection for breed */}
         <label htmlFor="breed">
           Breed
           <select
@@ -56,8 +75,17 @@ const SearchParams = () => {
             ))}
           </select>
         </label>
+        {/* submit button */}
         <button>Submit</button>
       </form>
+      {pets.map((pet) => (
+        <Pet
+          name={pet.name}
+          animal={pet.animal}
+          breed={pet.breed}
+          key={pet.id}
+        />
+      ))}
     </div>
   );
 };

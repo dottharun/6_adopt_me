@@ -27,7 +27,7 @@ export default function useBreedList(animal) {
       setBreedList(localCache[animal]);
       setStatus("loaded");
     }
-  });
+  }, [animal]);
 
   return [breedList, status];
 }

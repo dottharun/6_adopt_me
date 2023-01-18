@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Pet from "./Pet";
+import useBreedList from "./useBreedList.js";
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
@@ -8,7 +9,7 @@ const SearchParams = () => {
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
   const [pets, setPets] = useState([]);
-  const breeds = []; //TODO remove it and add API
+  const [breeds] = useBreedList(animal);
 
   // ABOVE destructuring can be written explicitly as
   // const locationHook = useState("");
@@ -16,7 +17,7 @@ const SearchParams = () => {
   // const setLocation = locationHook[1];
 
   useEffect(() => {
-    console.log("use effect");
+    console.log("useEffect requesting pets");
     requestPets();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -50,7 +51,7 @@ const SearchParams = () => {
         </label>
         {/* selection for animal */}
         <label htmlFor="animal">
-          Fuck
+          Animal
           <select
             id="animal"
             value={animal}

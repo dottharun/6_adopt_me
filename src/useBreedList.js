@@ -7,11 +7,16 @@ export default function useBreedList(animal) {
   const [status, setStatus] = useState("unloaded");
 
   useEffect(() => {
+    console.log(`breed call`);
+
     if (!animal) {
+      // if no animal is selected in the select form in searchParams
       setBreedList([]);
     } else if (localCache[animal]) {
+      // if it exists already in localCache
       setBreedList(localCache[animal]);
     } else {
+      // if it does'nt exist in localCache
       requestBreedList();
     }
 

@@ -16,9 +16,9 @@ const SearchParams = () => {
   // const setLocation = locationHook[1];
 
   useEffect(() => {
-    console.log("useeffect");
+    console.log("use effect");
     requestPets();
-  });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function requestPets() {
     const res = await fetch(
@@ -32,7 +32,12 @@ const SearchParams = () => {
   // returning jsx
   return (
     <div className="search-params">
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestPets();
+        }}
+      >
         {/* input for location */}
         <label htmlFor="location">
           Location
@@ -45,7 +50,7 @@ const SearchParams = () => {
         </label>
         {/* selection for animal */}
         <label htmlFor="animal">
-          Animal
+          Fuck
           <select
             id="animal"
             value={animal}

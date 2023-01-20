@@ -4,7 +4,7 @@ import fetchPet from "./fetchPet";
 
 const Details = () => {
   const { id } = useParams();
-  const results = useQuery(["details", id], fetchPet);
+  const results = useQuery(["details", id], fetchPet); //reactquery hook to request api if its not available in cache
 
   if (results.isLoading) {
     return (

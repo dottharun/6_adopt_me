@@ -42,7 +42,7 @@ const SearchParams = () => {
           Animal
           <select
             id="animal"
-            value={animal}
+            name="animal"
             onChange={(e) => {
               setAnimal(e.target.value);
             }}
